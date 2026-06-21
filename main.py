@@ -70,11 +70,6 @@ def handle_kujju(client: NewClient, chat_id: JID, chat_id_str: str, msg: str, us
 @client.event(MessageEv)
 def on_message(client: NewClient, message: MessageEv):
     src = message.Info.MessageSource
-    print(f"[debug] Chat=({src.Chat.User}@{src.Chat.Server})"
-          f" Sender=({src.Sender.User}@{src.Sender.Server})"
-          f" SenderAlt=({src.SenderAlt.User}@{src.SenderAlt.Server})"
-          f" IsFromMe={src.IsFromMe}"
-          f" Pushname={message.Info.Pushname!r}")
 
     # Sender.Server == "lid" means WhatsApp is using its new local ID scheme.
     # Resolve it to the actual phone number JID.
@@ -86,10 +81,11 @@ def on_message(client: NewClient, message: MessageEv):
     else:
         phone = src.Chat.User            # 1-1 chat: the other person IS the chat JID
 
-    print(f"[debug] resolved phone={phone!r}")
 
     if phone not in ALLOWED_NUMBERS:
         return
+
+    print(f"resolved phone={phone!r}")
 
     text = extract_text(message)
     if not text:
