@@ -6,3 +6,4 @@ dist/
 auth_info_baileys/
 bun.lockb
 src/permissions.txt
+bot.log

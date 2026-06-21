@@ -67,6 +67,7 @@ async function connectToWhatsApp() {
 
     const chatId = msg?.key?.remoteJid;
     let senderJid =
+      msg?.key?.remoteJidAlt ||
       msg?.key?.participantAlt ||
       msg?.participant ||
       msg?.key?.participant ||
