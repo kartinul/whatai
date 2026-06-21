@@ -1,12 +1,12 @@
 # WhatAI
 
-A WhatsApp AI bot powered by Google Gemini and Neonize. It features rate-limit handling, persistent chat history context, and a secure PC-automation CLI command handler for the owner.
+A WhatsApp AI bot powered by Google Gemini and Baileys (TypeScript). It features rate-limit handling, persistent chat history context, and a secure PC-automation CLI command handler for the owner.
 
 ## Setup
 
-1. Install dependencies:
+1. Install dependencies using Bun:
    ```bash
-   pip install -r requirements.txt
+   bun install
    ```
 
 2. Create a `.env` file in the root directory:
@@ -21,7 +21,7 @@ A WhatsApp AI bot powered by Google Gemini and Neonize. It features rate-limit h
 
 Run the bot:
 ```bash
-python main.py
+bun start
 ```
 *On the first run, it will generate a QR code in the terminal. Scan it with your WhatsApp mobile app to link the session.*
 
