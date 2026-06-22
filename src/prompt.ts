@@ -1,10 +1,10 @@
 import * as fs from "fs";
 import * as path from "path";
 
-let permissionsText = "";
+let ownerSensitive = "";
 try {
-  permissionsText = fs.readFileSync(
-    path.join(__dirname, "permissions.txt"),
+  ownerSensitive = fs.readFileSync(
+    path.join(__dirname, "owner_system_prompt_sensitive.txt"),
     "utf8",
   );
 } catch (e) {
@@ -39,18 +39,16 @@ Common games and their place IDs:
 
 - to open rocket leauge - com.epicgames.launcher://apps/9773aa1aa54f4f7b80e44bef04986cea%3A530145df28a24424923f5828cc9031a1%3ASugar?action=launch&silent=true
 
-- For JJS Private Server (ONLY open this if the user explicitly asks for 'jjs ps', 'jjs private server', or similar full form):
-Use exactly this URL: roblox://placeId=9391468976&linkCode=37486539973895694712035700143169
+- kujju commands Usage: kujju-wa <start|stop|restart|enable|disable>
+- enable and disable enables and disables kujju to run at startup (when windows turn on)
 
 Examples:
 - "increase volume" → {"command": "powershell -c \\"$obj=New-Object -ComObject WScript.Shell; 1..5 | %{$obj.SendKeys([char]175)}\\"", "response": "volume up"}
 - "open notepad"    → {"command": "notepad", "response": "notepad opened"}
 - "allow 123456"    → {"command": "python skills/add_number.py 123456", "response": "added 123456 to allowed numbers"}
 - "play jjs"        → {"command": "start \\"\\" \\"roblox://placeId=9391468976/\\"", "response": "opening jjs"}
-- "jjs ps"          → {"command": "start \\"\\" \\"roblox://placeId=9391468976&linkCode=37486539973895694712035700143169\\"", "response": "opening jjs private server"}
 
-CRITIAL! DO NOT HALLUCINATE HERE! IMPORTANT!
-${permissionsText}
+${ownerSensitive}
 `;
 
 export function ownerPrompt(cmd: string, phone: string): string {
@@ -69,9 +67,11 @@ export function userPrompt(
     lines = history.map((h) => `${h.sender}: ${h.text}`).join("\n");
   }
 
+  console.log({ username, history });
   return `
 ## Recent chat history (oldest to newest)
 ${lines}
+(Note: Give more importance to newer messages, and less to older ones)
 
 ## Latest message
 ${username}: ${msg}

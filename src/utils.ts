@@ -25,7 +25,7 @@ export function recordMessage(
 
 export function getChatHistory(
   chatId: string,
-  n: number = 5,
+  n: number = 10,
 ): { sender: string; text: string }[] {
   const history = historyStore.get(chatId) || [];
   return history.slice(-n);
