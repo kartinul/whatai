@@ -16,6 +16,7 @@ import {
 } from "./prompt";
 import { callGroqLlm } from "./groq_helpers";
 import { callLlm } from "./ai_helpers";
+import { streamHermes } from "./hermes_bridge";
 
 dotenv.config();
 
@@ -150,6 +151,20 @@ async function connectToWhatsApp() {
       } catch (err: any) {
         console.log(`[error] AI reply failed: ${err.message}`);
       }
+    }
+
+    // --- Hermes bridge command ---
+    if (lowerText.startsWith("$kujju")) {
+      const prompt = text.trim().substring(6).trim();
+      if (!prompt) {
+        await sendMsg(sock, chatId, "Usage: $kujju <your prompt>");
+        recordMessage(chatId, username, text);
+        return;
+      }
+      streamHermes(sock, chatId, prompt).catch((err: any) => {
+        console.error("[hermes] bridge error:", err);
+        sendMsg(sock, chatId, `[!] Hermes bridge failed: ${err.message}`);
+      });
     }
     // Record history
     recordMessage(chatId, username, text);
