@@ -27,5 +27,15 @@ bun start
 
 ### Features
 - **AI Chat:** Anyone in `ALLOWED_NUMBERS` can talk to the bot by starting their message with `kujju`.
+- **Hermes Bridge:** Anyone in `ALLOWED_NUMBERS` can send `$kujju <prompt>` to query Hermes Agent via SSE stream. Responses are delivered with `>` prefix.
 - **Owner Commands:** Anyone in `OWNER_NUMBERS` can run PC commands by sending `!kujju <command>` (e.g. `!kujju increase volume` or `!kujju open notepad`).
 - **Dynamic Skills:** Easily add numbers to the allowlist via `python skills/add_number.py <number>`.
+
+### Hermes Bridge Setup
+
+Add to your `.env`:
+```ini
+HERMES_API_URL=https://your-hermes-instance.up.railway.app
+```
+
+The bridge sends a prompt to Hermes's `/api/chat` endpoint with streaming enabled, and relays only the final `message` and `error` events back to WhatsApp.
