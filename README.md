@@ -36,6 +36,7 @@ bun start
 Add to your `.env`:
 ```ini
 HERMES_API_URL=https://your-hermes-instance.up.railway.app
+HERMES_API_KEY=your-...rd
 ```
 
-The bridge sends a prompt to Hermes's `/api/chat` endpoint with streaming enabled, and relays only the final `message` and `error` events back to WhatsApp.
+The bridge sends a prompt to Hermes's `/hapi/v1/chat/completions` endpoint using the OpenAI Chat Completions format with streaming enabled. It relays only the final `message` and `error` events back to WhatsApp. Auth is via `Authorization: Bearer` header using the **same password as the dashboard** (`DASHBOARD_PASSWORD`).

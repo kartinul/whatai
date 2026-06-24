@@ -16,9 +16,14 @@ export async function streamHermes(
   chatId: string,
   prompt: string,
 ): Promise<void> {
-  const resp = await fetch(`${HERMES_URL}/api/chat`, {
+  const headers: Record<string, string> = { "Content-Type": "application/json" };
+  if (process.env.HERMES_API_KEY) {
+    headers["Authorization"] = `Bearer ${process.env.HERMES_API_KEY}`;
+  }
+
+  const resp = await fetch(`${HERMES_URL}/hapi/v1/chat/completions`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers,
     body: JSON.stringify({
       messages: [{ role: "user", content: prompt }],
       stream: true,
