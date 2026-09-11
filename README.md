@@ -31,6 +31,10 @@ bun start
 - **Owner Commands:** Anyone in `OWNER_NUMBERS` can run PC commands by sending `!kujju <command>` (e.g. `!kujju increase volume` or `!kujju open notepad`).
 - **Dynamic Skills:** Easily add numbers to the allowlist via `python skills/add_number.py <number>`.
 
+---
+
+*Powered by [Hermes Agent](https://github.com/NousResearch/hermes-agent)*
+
 ### Hermes Bridge Setup
 
 Add to your `.env`:
