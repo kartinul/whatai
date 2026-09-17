@@ -1,6 +1,7 @@
 # WhatAI
 
 A WhatsApp AI bot powered by Google Gemini and Baileys (TypeScript). It features rate-limit handling, persistent chat history context, and a secure PC-automation CLI command handler for the owner.
+ok
 
 ## Setup
 
